@@ -30,9 +30,10 @@
     app.toggleAddDialog(true);
   });
 
-  document.getElementById('butAddPhoto').addEventListener('click', function() {
+  document.getElementById('photo-input').addEventListener('change', function(){
+    if(document.getElementById('photo-input').files.length > 0){
     var photoInput = document.getElementById('photo-input');
-    var file = photoInput.file;
+    var file = photoInput.files[0];
     var formData = new FormData();
     formData.append('photo', file, file.name)
     var xhr = new XMLHttpRequest();
@@ -40,7 +41,9 @@
     // TODO: add handler for onload
     xhr.send(formData)
     app.toggleAddDialog(false);
+    }
   });
+
 
   document.getElementById('butAddCancel').addEventListener('click', function() {
     app.toggleAddDialog(false);
