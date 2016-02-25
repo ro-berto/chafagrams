@@ -91,9 +91,9 @@ body {
     border: none;
     outline: none; }
   .header #butRefresh {
-    background: url(/images/ic_refresh_white_24px.svg) center center no-repeat; }
+    background: url(/static/images/ic_refresh_white_24px.svg) center center no-repeat; }
   .header #butAdd {
-    background: url(/images/ic_add_white_24px.svg) center center no-repeat; }
+    background: url(/static/images/ic_add_white_24px.svg) center center no-repeat; }
 
 .header__title {
   font-weight: 400;
