@@ -18,7 +18,7 @@ class PutPage(webapp2.RequestHandler):
     gcspath = '/%s/%s' % (BUCKET, filename)
     write_retry_params = gcs.RetryParams(backoff_factor=1.1)
     gcsfile =  gcs.open(gcspath, 'w', content_type='image/png',
-                        options={'x-goog-meta-comment': comment}
+                        options={'x-goog-meta-comment': comment},
                         retry_params=write_retry_params)
     gcsfile.write(image)
     gcsfile.close()
