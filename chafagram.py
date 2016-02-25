@@ -6,9 +6,9 @@ import webapp2
 BUCKET = 'chafagramdemophotos'
 
 class MainPage(webapp2.RequestHandler):
-    def get(self):
-        self.response.headers['Content-Type'] = 'text/plain'
-        self.response.write('Hello, World!')  # TODO: Serve app here.
+  def get(self):
+    self.response.headers['Content-Type'] = 'text/plain'
+    self.response.write('Hello, World!')  # TODO: Serve app here.
 
 class PutPage(webapp2.RequestHandler):
   def post(self):

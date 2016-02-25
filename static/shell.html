@@ -15,10 +15,28 @@
   </header>
 
   <main class="main" hidden>
-    <!-- Insert forecast-card.html here -->
+    <div class="card cardTemplate chafagram" hidden>
+      <div class="photo"></div>
+      <div class="comment"></div>
+      <div class="author"></div>
+      <div class="date"></div>
+    </div>
   </main>
 
   <div class="dialog-container">
+    <div class="dialog">
+      <div class="dialog-title">Sube tu foto</div>
+      <div class="dialog-body">
+        <input id="photo-input" type="file" accept="image/*" capture="camera">
+        </input>
+      </div>
+      <div class="dialog-buttons">
+        <button id="butAddPhoto" class="button" disabled="disabled">
+          Subir
+        </button>
+        <button id="butAddCancel" class="button">Cancelar</button>
+      </div>
+    </div>
     <!-- Insert add-new-city-dialog.html here -->
   </div>
 
