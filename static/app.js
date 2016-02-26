@@ -160,15 +160,26 @@
   };
 
   app.makeCards = function(entries) {
-    for (var i; i < entries.length; i ++) {
+    var cards = [];
+    var container = document.getElementById('card-container');
+    for (var i; i < entries.length; i++) {
       var current = document.getElementById(post_id);
       if(current) {
         break;
       }
-      entries[i].post_id
-          //TODO:
+      cards.push(app.makeNewCard(entries[i]));
+    }
+    for var i; i < cards.length; i++){
+      container.
     }
   };
+
+  app.makeNewCard = function(entry) {
+    var prototype = document.getElelementById('prototype-card');
+    var newCard = prototype.cloneNode(true);
+    newcard.id = entry.post_id;
+    //set image src, set comment text (including date)
+  }
 
   var fakeForecast = {
     key: 'newyork',
