@@ -12,19 +12,12 @@ import webapp2
 BUCKET = 'chafagramdemophotos'
 
 
-class MainPage(webapp2.RequestHandler):
-  def get(self):
-    self.response.headers['Content-Type'] = 'text/html'
-    self.response.write(open(
-        os.path.join(os.path.dirname(__file_), 'static','shell.html')).read())
-
-
 class RecentPage(webapp2.RequestHandler):
   def get(self):
     result = []
     for c in Chafagram.query().order(-Chafagram.date).fetch(20):
       result.append({'url': c.image_file,
-                     'date': c.date,
+                     'date': c.date.isoformat(),
                      'comment': c.comment})
     self.response.headers['Content-Type'] = 'application/json'
     self.response.write(json.dumps(result))
@@ -47,7 +40,7 @@ class PutPage(webapp2.RequestHandler):
     chafagram = Chafagram()
     chafagram.image_file = filename
     chafagram.comment = comment
-    chafagram.save()
+    chafagram.put()
 
     self.response.headers['Content-Type'] = 'text/plain'
     self.response.write('Photo uploaded as: ' + gcspath)
@@ -60,7 +53,6 @@ class Chafagram(ndb.Model):
 
 
 app = webapp2.WSGIApplication([
-    ('/', MainPage),
     ('/put', PutPage),
     ('/recent', RecentPage),
 ], debug=True)
