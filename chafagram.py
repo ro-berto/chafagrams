@@ -38,7 +38,7 @@ class PutPage(webapp2.RequestHandler):
     gcsfile.close()
 
     chafagram = Chafagram()
-    chafagram.image_file = filename
+    chafagram.image_file = gcspath
     chafagram.comment = comment
     chafagram.put()
 
