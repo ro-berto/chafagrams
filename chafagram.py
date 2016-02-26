@@ -18,7 +18,8 @@ class RecentPage(webapp2.RequestHandler):
     for c in Chafagram.query().order(-Chafagram.date).fetch(20):
       result.append({'url': c.image_file,
                      'date': c.date.isoformat(),
-                     'comment': c.comment})
+                     'comment': c.comment,
+                     'post_id': c.post_id})
     self.response.headers['Content-Type'] = 'application/json'
     self.response.write(json.dumps(result))
 
@@ -47,6 +48,7 @@ class PutPage(webapp2.RequestHandler):
 
 
 class Chafagram(ndb.Model):
+  post_id = ndb.StringProperty()
   image_file = ndb.StringProperty()
   comment = ndb.StringProperty()
   date = ndb.DateTimeProperty(auto_now_add=True)

@@ -144,27 +144,30 @@
     request.send();
   };
 
-  app.display= function() {
-    //fetch images at or beyond the viewport first (use scroll direction)
-    //4 screenfuls ahead, 1 before
-  };
-  //trigger this when scrolling past the 2/3rds of the list, fetch as many items
-  //as cached.
-  app.fetch_more= function() {
-    // TODO: post request for keys starting at end
-    // insert them
-
-  };
 
   app.refresh = function() {
-    // TODO: Post request to index
-    // insert elements until
-    //   a) one of them matches the cache OR
-    //   b) you reach the end of the list
-    var keys = Object.keys(app.visibleCards);
-    keys.forEach(function(key) {
-      app.getForecast(key);
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+      if (request.readyState === XMLHttpRequest.DONE) {
+        if (request.status === 200) {
+          var chafagrams = JSON.parse(request.response);
+          app.makeCards(chafagrams);
+        }
+      }
     });
+    request.open('GET', '/recent');
+    request.send();
+  };
+
+  app.makeCards = function(entries) {
+    for (var i; i < entries.length; i ++) {
+      var current = document.getElementById(post_id);
+      if(current) {
+        break;
+      }
+      entries[i].post_id
+          //TODO:
+    }
   };
 
   var fakeForecast = {
