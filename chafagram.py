@@ -1,5 +1,6 @@
 import uuid
 
+from PIL import Image
 import cloudstorage as gcs
 import webapp2
 
@@ -13,14 +14,16 @@ class MainPage(webapp2.RequestHandler):
 class PutPage(webapp2.RequestHandler):
   def post(self):
     comment = 'No comment'  # TODO: Actually read this from post.
-    image = self.request.POST.multi['photo'].file.read()
+    image_file = self.request.POST.multi['photo'].file
+    image = Image.open(image_file)
+    image.thumbnail((1080, 1080), Image.ANTIALIAS)
     filename = uuid.uuid4().hex + '.png'
     gcspath = '/%s/%s' % (BUCKET, filename)
     write_retry_params = gcs.RetryParams(backoff_factor=1.1)
     gcsfile =  gcs.open(gcspath, 'w', content_type='image/png',
                         options={'x-goog-meta-comment': comment},
                         retry_params=write_retry_params)
-    gcsfile.write(image)
+    image.save(gcsfile, 'PNG')
     gcsfile.close()
     self.response.headers['Content-Type'] = 'text/plain'
     self.response.write('Photo uploaded as: ' + gcspath)
