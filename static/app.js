@@ -152,16 +152,15 @@
           var chafagrams = JSON.parse(request.response);
           app.makeCards(chafagrams);
           if (app.isLoading) {
-	    app.spinner.setAttribute('hidden', true);
-	    app.container.removeAttribute('hidden');
-	    app.isLoading = false;
-	  }
+            app.spinner.setAttribute('hidden', true);
+            app.container.removeAttribute('hidden');
+            app.isLoading = false;
+          }
         }
       }
     };
     request.open('GET', '/recent');
     request.send();
-    console.log('heyya');
   };
 
   app.makeCards = function(entries) {
@@ -181,10 +180,11 @@
   };
 
   app.makeNewCard = function(entry) {
+    var gs_url = 'https://storage.googleapis.com';
     var prototype = document.getElementById('prototype-card');
     var newCard = prototype.cloneNode(true);
     newCard.id = entry.post_id;
-    newCard.querySelector('.photo').src = entry.url;
+    newCard.querySelector('.photo').src = gs_url + entry.url;
     newCard.querySelector('.comment').textContent = entry.comment;
     newCard.querySelector('.date').textContent = entry.date;
     return newCard;
