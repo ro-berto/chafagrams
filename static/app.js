@@ -22,7 +22,6 @@
    ****************************************************************************/
 
   document.getElementById('butRefresh').addEventListener('click', function() {
-    // Refresh all of the forecasts
     app.refresh();
   });
 
@@ -152,18 +151,24 @@
         if (request.status === 200) {
           var chafagrams = JSON.parse(request.response);
           app.makeCards(chafagrams);
+          if (app.isLoading) {
+	    app.spinner.setAttribute('hidden', true);
+	    app.container.removeAttribute('hidden');
+	    app.isLoading = false;
+	  }
         }
       }
-    });
+    };
     request.open('GET', '/recent');
     request.send();
+    console.log('heyya');
   };
 
   app.makeCards = function(entries) {
     var cards = [];
     var container = document.getElementById('card-container');
     for (var i = 0; i < entries.length; i++) {
-      var current = document.getElementById(post_id);
+      var current = document.getElementById(entries[i].post_id);
       if(current) {
         break;
       }
@@ -176,13 +181,13 @@
   };
 
   app.makeNewCard = function(entry) {
-    var prototype = document.getElelementById('prototype-card');
+    var prototype = document.getElementById('prototype-card');
     var newCard = prototype.cloneNode(true);
-    newcard.id = entry.post_id;
-    newcard.querySelector('.photo').src = entry.url;
-    newcard.querySelector('.comment').textContent = entry.comment;
-    newcard.querySelector('.date').textContent = entry.date;
-    return newcard;
+    newCard.id = entry.post_id;
+    newCard.querySelector('.photo').src = entry.url;
+    newCard.querySelector('.comment').textContent = entry.comment;
+    newCard.querySelector('.date').textContent = entry.date;
+    return newCard;
   }
 
   var fakeForecast = {
