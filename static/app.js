@@ -162,15 +162,16 @@
   app.makeCards = function(entries) {
     var cards = [];
     var container = document.getElementById('card-container');
-    for (var i; i < entries.length; i++) {
+    for (var i = 0; i < entries.length; i++) {
       var current = document.getElementById(post_id);
       if(current) {
         break;
       }
       cards.push(app.makeNewCard(entries[i]));
     }
-    for var i; i < cards.length; i++){
-      container.
+    for (var i = cards.length - 1; i >= 0; i--){
+      container.insertBefore(cards[i], container.childNodes[0]);
+      cards[i].hidden = false;
     }
   };
 
@@ -178,7 +179,10 @@
     var prototype = document.getElelementById('prototype-card');
     var newCard = prototype.cloneNode(true);
     newcard.id = entry.post_id;
-    //set image src, set comment text (including date)
+    newcard.querySelector('.photo').src = entry.url;
+    newcard.querySelector('.comment').textContent = entry.comment;
+    newcard.querySelector('.date').textContent = entry.date;
+    return newcard;
   }
 
   var fakeForecast = {
