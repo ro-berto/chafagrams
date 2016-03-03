@@ -28,8 +28,12 @@
     var formData = new FormData();
     formData.append('photo', file, file.name)
     var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === XMLHttpRequest.DONE){
+        app.refresh();
+      }
+    };
     xhr.open('POST', '/put', true);
-    // TODO: add handler for onload
     xhr.send(formData)
     app.toggleAddDialog(false);
     }
