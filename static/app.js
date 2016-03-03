@@ -3,7 +3,7 @@
   'use strict';
 
   var app = {
-    requestidx: 0;
+    requestidx: 0,
     isLoading: true,
     visibleCards: {},
     spinner: document.querySelector('.loader'),
