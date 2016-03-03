@@ -29,7 +29,7 @@ class PutPage(webapp2.RequestHandler):
     comment = 'No comment'  # TODO: Actually read this from post.
     image_file = self.request.POST.multi['photo'].file
     image = Image.open(image_file)
-    image.thumbnail((1080, 1080), Image.ANTIALIAS)
+    image.thumbnail((400, 1080), Image.ANTIALIAS)
     filename = uuid.uuid4().hex + '.png'
     gcspath = '/%s/%s' % (BUCKET, filename)
     write_retry_params = gcs.RetryParams(backoff_factor=1.1)
