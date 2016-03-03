@@ -30,7 +30,8 @@ class PutPage(webapp2.RequestHandler):
     image_file = self.request.POST.multi['photo'].file
     image = Image.open(image_file)
     image.thumbnail((400, 1080), Image.ANTIALIAS)
-    filename = uuid.uuid4().hex + '.png'
+    post_id = uuid.uuid4().hex
+    filename = post_id+ '.png'
     gcspath = '/%s/%s' % (BUCKET, filename)
     write_retry_params = gcs.RetryParams(backoff_factor=1.1)
     gcsfile =  gcs.open(gcspath, 'w', content_type='image/png',
@@ -41,6 +42,7 @@ class PutPage(webapp2.RequestHandler):
     chafagram = Chafagram()
     chafagram.image_file = gcspath
     chafagram.comment = comment
+    chafagram.post_id = post_id
     chafagram.put()
 
     self.response.headers['Content-Type'] = 'text/plain'
