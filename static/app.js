@@ -13,12 +13,6 @@
   };
 
 
-  /*****************************************************************************
-   *
-   * Event listeners for UI elements
-   *
-   ****************************************************************************/
-
   document.getElementById('butRefresh').addEventListener('click', function() {
     app.refresh();
   });
@@ -46,13 +40,6 @@
   });
 
 
-  /*****************************************************************************
-   *
-   * Methods to update/refresh the UI
-   *
-   ****************************************************************************/
-
-  // Toggles the visibility of the add new city dialog.
   app.toggleAddDialog = function(visible) {
     app.refresh();
     if (visible) {
@@ -61,13 +48,6 @@
       app.addDialog.classList.remove('dialog-container--visible');
     }
   };
-
-  /*****************************************************************************
-   *
-   * Methods for dealing with the model
-   *
-   ****************************************************************************/
-
 
   app.refresh = function() {
     var request = new XMLHttpRequest();
@@ -95,7 +75,7 @@
     for (var i = 0; i < entries.length; i++) {
       var current = document.getElementById(entries[i].post_id);
       if(current) {
-        break;
+        continue;
       }
       cards.push(app.makeNewCard(entries[i]));
     }
@@ -111,8 +91,6 @@
     var newCard = prototype.cloneNode(true);
     newCard.id = entry.post_id;
     newCard.querySelector('.photo').src = gs_url + entry.url;
-    newCard.querySelector('.comment').textContent = entry.comment;
-    newCard.querySelector('.date').textContent = entry.date;
     return newCard;
   }
 
