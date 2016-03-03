@@ -9,7 +9,7 @@ import cloudstorage as gcs
 import webapp2
 
 
-BUCKET = 'chafagramdemophotos'
+BUCKET = 'dontertodemo83'
 
 
 class RecentPage(webapp2.RequestHandler):

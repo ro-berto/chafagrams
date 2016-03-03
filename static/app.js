@@ -19,6 +19,7 @@
 
   document.getElementById('butAdd').addEventListener('click', function() {
     app.toggleAddDialog(true);
+    document.getElementById('photo-input').click();
   });
 
   document.getElementById('photo-input').addEventListener('change', function(){
