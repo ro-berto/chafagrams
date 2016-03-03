@@ -207,6 +207,7 @@ body {
   padding: 24px; }
 
 .card {
+  display: inline-block;
   padding: 16px;
   position: relative;
   box-sizing: border-box;
@@ -226,7 +227,12 @@ body {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex; }
-  /* TODO: make current card more prominent*/
+
+.card-container{
+  margin: auto;
+  max-width: 500px;
+  display: block
+}
 
 .chafagram .future {
   display: -webkit-box;
@@ -237,10 +243,8 @@ body {
 .photo {
   width: 300px;
   height: auto;
+  display: block
 }
-/* TODO: add muted style for unloaded grams*/
-
-/* TODO: Add style for photos*/
 
 @media (max-width: 450px) {
   .chafagram .date, .chafagram .description {
