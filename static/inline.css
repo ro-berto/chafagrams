@@ -234,6 +234,10 @@ body {
   display: -ms-flexbox;
   display: flex; }
 
+.photo {
+  width: 300px;
+  height: auto;
+}
 /* TODO: add muted style for unloaded grams*/
 
 /* TODO: Add style for photos*/
